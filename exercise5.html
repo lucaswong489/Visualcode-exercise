@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML DOM,Event and Object</title>
+</head>
+
+<body>
+    <form onsubmit="addFunction(event)">
+        <table>
+            <tr>
+                <td>
+                    Car Plate
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    <input type="text" id="carPlate" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Parking Hours
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    <input type="text" id="hours" required>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td> <input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+    <p id="demo"></p>
+    <script>
+        var objArray = [];
+
+        function addFunction(event) {
+            event.preventDefault();
+
+            document.getElementById("demo").innerHTML = "";
+
+            var carPlateNumber = document.getElementById("carPlate").value;
+            var hours = parseFloat(document.getElementById("hours").value);
+
+            var obj = new Object();
+            obj.CarPlate = carPlateNumber;
+            obj.ParkingHours = hours;
+            obj.Charges = calculateCharges(hours);
+
+            objArray.push(obj);
+
+            objArray.sort(function (a, b) { // ascending order sorting function based on ParkingHours
+                return a.ParkingHours - b.ParkingHours; // return positive value if a.ParkingHours is greater than b.ParkingHours
+            });
+
+            objArray.reverse(); // to make elements in the array to be in descending based on the Parking Hours
+
+            for (var i = 0; i < objArray.length; i++) {
+                document.getElementById("demo").innerHTML += "Car Plate Number: " + objArray[i].CarPlate + "  Parking Hours: " + objArray[i].ParkingHours + " Charges: " + objArray[i].Charges + "<br>";
+                5
+            }
+
+            document.getElementById("carPlate").value = "";
+            document.getElementById("hours").value = "";
+
+        }
+
+        function calculateCharges(hours) {
+            var charge = 0.0;
+
+            if (hours > 0.0 && hours <= 3.0)
+                charge = 2.0;
+            else if (hours > 3.0) {
+                charge = 2.0 + 0.5 * Math.ceil(hours - 3.0);//Round a number nearest and returns the smallest integer greater than or equal to a given number
+
+                if (charge > 10.0)
+                    charge = 10.0;
+            }
+
+            return charge;
+        }
+    </script>
+</body>
+
+</html>

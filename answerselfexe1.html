@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> HTML DOM,Event and Object</title>
+</head>
+
+<body>
+    <form onsubmit="addArrayFunction(event)">
+        <table>
+            <tr>
+                <td>
+                    Enter integer value
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    <input type="text" id="num" required>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td> <input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+    <p>
+        <input type="button" value="Replace Even Number Values" onclick="evenNumberFunction()">
+    </p>
+    <p id="demo">
+    </p>
+    <p id="demoEven">
+    </p>
+    <script>
+        var arr = []; //array to keep the original values entered by the user
+
+        var newArr = []; //array that keeps the value with even numbers converted to -111
+
+        function addArrayFunction(event) {
+            event.preventDefault();
+
+            var num = parseInt(document.getElementById("num").value); //The value retrieved from the input text box is a string. So, it must be converted to an integer number using parseInt method.
+
+            arr.push(num); //push the integer number into the array arr
+
+            newArr.push(num); //push the integer number into the array newArr
+
+            alert("Inserted successfully"); //Use the alert message box to display the message "Inserted successfully"
+
+            document.getElementById("num").value = "";
+
+        }
+
+        function evenNumberFunction() {
+
+            //Use a for loop to check all the items in the araay newArr. If the item is an even number then replace it with -111.
+            for (var b = 0; b < newArr.length; b++) {
+                if (newArr[b] % 2 == 0) //use %2 to get the remainder after deviding by 2. We will replace the number with -111 if the number is an even number. The number is an even number if the remainder is 0.
+                    newArr[b] = -111; //replace the number with -111 for even number
+            }
+
+            document.getElementById("demo").innerHTML = arr.join('<br>');
+
+            document.getElementById("demoEven").innerHTML = newArr.join('<br>');
+        }
+    </script>
+</body>
+
+</html>

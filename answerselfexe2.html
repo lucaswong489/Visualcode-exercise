@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> HTML DOM,Event and Object</title>
+</head>
+
+<body>
+    <form onsubmit="calculateFunction(event)">
+        <table>
+            <tr>
+                <td>
+                    Enter string value
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    <input type="text" id="str" required>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td> <input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+    <p id="demo"></p>
+    <script>
+
+
+        function calculateFunction(event) {
+            event.preventDefault();
+
+            var str = document.getElementById("str").value;
+
+            var tokens = str.split(','); //Split the string everytime you encounter a ',' and keep in the tokens array.
+
+            var total = 0;
+
+            tokens.forEach(function (element) { //For each item in the tokens array
+                total += parseInt(element); //add it to the variable total. The array item in the tokens array is a string. So, must convert it to an integer number with parseInt.
+            });
+
+            document.getElementById("demo").innerHTML = "The sum is " + total + ".";
+
+            document.getElementById("str").value = "";
+
+        }
+
+
+    </script>
+</body>
+
+</html>
